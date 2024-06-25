@@ -79,13 +79,6 @@ func (t *Tunnel) Start() (string, error) {
 	return url, nil
 }
 
-func (t *Tunnel) Stop() {
-	if t.proc != nil && t.proc.Process != nil {
-		_ = t.proc.Process.Kill()
-		_ = t.proc.Wait()
-	}
-}
-
 // readURLFromTunnelStream reads the URL from the tunnel's stdout stream with timeout handling.
 func (t *Tunnel) readURLFromTunnelStream(r io.Reader) (string, error) {
 	log.Println("Reading from stream...")
@@ -118,6 +111,7 @@ func (t *Tunnel) readURLFromTunnelStream(r io.Reader) (string, error) {
 			if line == "" {
 				continue
 			}
+			log.Println("Read line:", line)
 			if strings.Contains(line, "start proxy success") {
 				matches := re.FindStringSubmatch(line)
 				if len(matches) == 2 {
@@ -133,6 +127,5 @@ func (t *Tunnel) readURLFromTunnelStream(r io.Reader) (string, error) {
 
 exit:
 	log.Println("Read operation completed.")
-	t.Stop() // Ensure tunnel is stopped regardless of outcome.
 	return url, err
 }

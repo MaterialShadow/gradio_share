@@ -9,6 +9,7 @@
 - [先决条件](#先决条件)
 - [安装](#安装)
 - [使用说明](#使用说明)
+- [参考](#参考)
 
 ## 特性
 
@@ -48,6 +49,8 @@ gradio-tunnel.exe -h
 ```
 
 ### 使用示例
+linux等环境需要将frpc和主程序添加可执行权限`chmod +x xxx`
+
 ```bash
 gradio-tunnel.exe -port 8081
 2024/06/25 17:34:30 frpc程序路径:D:\tools\gradio_tunnel\bin\frpc_windows_amd64.exe
@@ -61,3 +64,6 @@ gradio-tunnel.exe -port 8081
 2024/06/25 17:34:32 访问地址:https://6cb818bca414994400.gradio.live
 2024/06/25 17:34:32 连接有效期:72小时
 ```
+
+### 参考
+部分逻辑参考[gradio-tunneling](https://pypi.org/project/gradio-tunneling/)实现

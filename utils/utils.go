@@ -38,12 +38,7 @@ func GuessFrpcBinaryName() string {
 	platform := runtime.GOOS
 	//架构
 	arch := runtime.GOARCH
-	//extension
-	extension := ""
-	if platform == "windows" {
-		extension = ".exe"
-	}
-	return fmt.Sprintf("frpc_%s_%s%s", platform, arch, extension)
+	return fmt.Sprintf("frpc_%s_%s", platform, arch)
 }
 
 // printUsage 打印帮助信息

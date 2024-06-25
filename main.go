@@ -16,11 +16,12 @@ var (
 )
 
 func main() {
+	secretToken, _ := utils.GenerateSecureToken(32)
 	// 计算目标文件名称
 	fileName := utils.GuessFrpcBinaryName()
 	binaryPath = fmt.Sprintf("bin/%s", fileName)
 	// 定义命令行参数
-	portPtr := flag.Int("port", 8080, "定义要转发的端口")
+	portPtr := flag.Int("port", 8085, "定义要转发的端口")
 	address := flag.String("address", "https://api.gradio.app/v2/tunnel-request", "分享服务器地址")
 	binPath := flag.String("binPath", binaryPath, "frpc程序路径,默认查找可执行文件同级的bin目录")
 	// 设置帮助信息打印函数
@@ -67,7 +68,7 @@ func main() {
 		FrpcPath:   binaryPath,
 		RemoteHost: remoteHost,
 		RemotePort: remotePort,
-		LocalHost:  "localhost",
+		LocalHost:  "127.0.0.1",
 		LocalPort:  *portPtr,
 		ShareToken: secretToken,
 	}
